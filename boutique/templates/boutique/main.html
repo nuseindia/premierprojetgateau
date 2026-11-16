@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--========== BOX ICONS ==========-->
+        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <!--========== CSS ==========-->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+        <title>Bismi</title> 
+        <script type="text/javascript">
+            var user = '{{request.user}}'
+            function getToken(name) {
+                  var cookieValue = null;
+                  if (document.cookie && document.cookie !== '') {
+                      var cookies = document.cookie.split(';');
+                      for (var i = 0; i < cookies.length; i++) {
+                          var cookie = cookies[i].trim();
+                          // Does this cookie string begin with the name we want?
+                          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                              break;
+                          }
+                      }
+                  }
+                  return cookieValue;
+            }
+            var csrftoken = getToken('csrftoken');
+            function getCookie(name) {
+                var cookieArr = document.cookie.split(";");
+
+                for(var i = 0; i < cookieArr.length; i++){
+                    var cookiePair = cookieArr[i].split("=");
+                    if(name == cookiePair[0].trim()){
+                    return decodeURIComponent(cookiePair[1]); 
+                    }
+                }
+                return null;
+            }
+
+            var chariot = JSON.parse(getCookie('chariot'))
+            if(chariot == undefined){
+                chariot = {}
+                console.log(' Chariot est crée!')
+                document.cookie = 'chariot=' + JSON.stringify(chariot) + ";domain=;path=/"
+            }
+            console.log('Chariot:', chariot)
+        </script>
+
+    </head>
+
+
+
+    </head>
+    <body>
+
+        <!--========== SCROLL TOP ==========-->
+        <a href="#" class="scrolltop" id="scroll-top">
+            <i class='bx bx-chevron-up scrolltop__icon'></i>
+        </a>
+
+        <!--========== HEADER ==========-->
+        <header class="l-header" id="header">
+            <nav class="nav bd-container">
+                <a href="{% url 'accueil' %}" class="nav__logo">Bismi</a>                               
+                <div class="nav__menu" id="nav-menu">
+                    <ul class="nav__list">
+                        <li class="nav__item"><a href="{% url 'boutique' %}" class="nav__link">Produits Bismi</a></li>
+                        <li class="nav__item"><a href="{% url 'chariot' %}" class="nav__link">Boutique En Ligne</a></li>
+                        <li class="nav__item"><a href="{% url 'caisse' %}" class="nav__link">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="form-inline my-2 my-lg-0">                    
+                    <a href="{% url 'chariot' %}">
+                      <img  id="chariot-icon" src="{% static 'images/cart.png' %}">
+                    </a>
+                    <p id="chariot-total">{{chariotItems}}</p>
+                    <li><i class='bx bx-moon change-theme' id="theme-button">Bismillah</i></li>
+                </div>
+
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class='bx bx-menu'></i>
+                </div>
+                
+            </nav>
+        </header>
+
+        <div class="container">
+            <br>
+            {% block content %}
+
+            {% endblock content %}
+        </div>
+
+        <!--========== SCROLL REVEAL ==========-->
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <!--========== MAIN JS ==========-->
+        <script src="{% static 'js/main.js' %}"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    </body>
+     <!--========== FOOTER ==========-->
+    <footer class="footer section bd-container">
+        <div class="footer__container bd-grid">
+            <div class="footer__content">
+                <a href="#" class="footer__logo">Bismi</a>
+                <span class="footer__description">Gâteaux 100% Marocain.</span>
+                <div>
+                    <a href="#" class="footer__social"><i class='bx bxl-facebook'></i></a>
+                    <a href="#" class="footer__social"><i class='bx bxl-instagram'></i></a>
+                    <a href="#" class="footer__social"><i class='bx bxl-twitter'></i></a>
+                </div>
+            </div>
+
+            <div class="footer__content">
+                <h3 class="footer__title">Information</h3>
+                <ul>
+                    <li><a href="#" class="footer__link">À propos de nous</a></li>
+                    <li><a href="#" class="footer__link">Contactez-nous</a></li>
+                    <li><a href="#" class="footer__link">Nos assortiments</a></li>
+                </ul>
+            </div>
+
+            <div class="footer__content">
+                <h3 class="footer__title">Adresse</h3>
+                <ul>
+                    <li>Marrakech 40000 Maroc</li>
+                    <li>Tél : 06.00.00.00.00</li>
+                    <li>Bismi@hotmail.com</li>
+                </ul>
+            </div>
+
+            <div class="footer__content">
+                <h3 class="footer__title">Cadeaux</h3>
+                <ul>
+                    <li>Entrez votre n° téléphone</li>
+                    <li>vous obtiendrez un cadeau</li>
+                    <li><form method="#">    
+                            <a href="#" class="button"><input class="#" type="phone" name="phone" placeholder="n° de téléphone..."></a>
+                        </div>
+                    </form></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <p class="footer__copy">&#169;Conditions générales de vente - Site réalisé par Programera+</p>
+    </footer>
+</html>

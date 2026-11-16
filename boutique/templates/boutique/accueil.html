@@ -1,0 +1,16 @@
+{% extends 'boutique/main.html' %}
+{% load static %}
+{% block content %}
+    <!--========== Accueil ==========-->
+    <section class="home" id="home">
+        <div class="home__container bd-container bd-grid">
+            <div class="home__data">
+                <h1 class="home__title">Mongâteau</h1>
+                <h2 class="home__subtitle">Ces pâtisseries sont réalisées à base de cacahuètes, d'amandes et de miel <br> et sont généralement accompagnées <br> par du thé à la menthe..</h2>
+                <a href="{% url 'boutique' %}"class="button">ACHETER MAINTENANT</a>
+            </div>
+
+            <img src="{% static 'images/accueil.png' %}"  alt="" class="home__img">
+        </div>
+    </section>
+{% endblock content %}

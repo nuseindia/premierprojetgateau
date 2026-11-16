@@ -1,0 +1,23 @@
+{% extends 'boutique/main.html' %}
+{% load static %}
+{% block content %}
+    <section class="menu section bd-container" id="menu">
+        <span class="section-subtitle">Nos produits Orientales et Maghrébines</span>
+        <h2 class="section-title">Nos assortiments</h2>
+        <div class="row">
+            {% for produit in produits %}
+            <div class="col-lg-4">
+                <img class="thumbnail" src="{{produit.image.url}}">
+                <div class="box-element produit">
+                    <h6><strong>{{produit.nom}}</strong></h6>
+                    <hr>
+                    <button data-produit="{{produit.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-chariot">Ajouter au panier</button>
+                    <h4 style="display:inline-block; float: right">{{produit.prix|floatformat:2}}$</h4>    
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock content %}
+
+
